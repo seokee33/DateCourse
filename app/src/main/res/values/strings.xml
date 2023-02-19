@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">오늘은여기로</string>
+
+    <!-- Signup   -->
+    <string name="et_hint_email">이메일</string>
+    <string name="et_hint_pw">비밀번호</string>
+    <string name="et_hint_pwre">비밀번호 확인</string>
+    <string name="btn_signup">회원가입</string>
+    <string name="btn_signin_login">로그인</string>
+    <string name="user_name">이름</string>
+    <string name="select_date">선택</string>
+    <string name="user_birthday">생일</string>
+</resources>

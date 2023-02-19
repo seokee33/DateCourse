@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.seokee.datecourse.login.email.signin.SignInViewModel" />
+        <variable
+            name="activity"
+            type="com.seokee.datecourse.login.email.signin.SignIn" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".login.email.signin.SignIn">
+
+        <EditText
+            android:id="@+id/et_SignIn_Email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:ems="10"
+            android:minHeight="48dp"
+            android:inputType="textEmailAddress"
+            android:hint="@string/et_hint_email"
+            android:text="@{viewModel.email}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.20" />
+
+        <EditText
+            android:id="@+id/et_SignIn_Passwd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:minHeight="48dp"
+            android:layout_marginTop="10dp"
+            android:inputType="textPersonName"
+            android:text="@{viewModel.passwd}"
+            android:hint="@string/et_hint_pw"
+            app:layout_constraintEnd_toEndOf="@+id/et_SignIn_Email"
+            app:layout_constraintStart_toStartOf="@+id/et_SignIn_Email"
+            app:layout_constraintTop_toBottomOf="@+id/et_SignIn_Email" />
+
+        <Button
+            android:id="@+id/btn_SignIn_Login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> activity.emailLogin()}"
+            android:layout_marginTop="10dp"
+            android:paddingVertical="5dp"
+            android:backgroundTint="@color/main_color"
+            android:text="@string/btn_signin_login"
+            app:layout_constraintEnd_toEndOf="@+id/et_SignIn_Passwd"
+            app:layout_constraintStart_toStartOf="@+id/et_SignIn_Passwd"
+            app:layout_constraintTop_toBottomOf="@+id/et_SignIn_Passwd" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_signup"
+            android:onClick="@{() -> activity.emailSignUp()}"
+            app:layout_constraintEnd_toEndOf="@+id/btn_SignIn_Login"
+            app:layout_constraintHorizontal_bias="0.94"
+            app:layout_constraintStart_toStartOf="@+id/btn_SignIn_Login"
+            app:layout_constraintTop_toBottomOf="@+id/btn_SignIn_Login" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

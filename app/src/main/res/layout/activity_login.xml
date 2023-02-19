@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.seokee.datecourse.login.LoginViewModel" />
+        <variable
+            name="activity"
+            type="com.seokee.datecourse.login.Login" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".login.Login">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2"
+            app:srcCompat="@drawable/ic_logo" />
+        <ImageButton
+            android:id="@+id/btn_Login_Kakao"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()-> activity.loginKakao()}"
+            android:layout_marginHorizontal="20dp"
+            android:adjustViewBounds="true"
+            android:elevation="20dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8"
+            app:srcCompat="@drawable/ic_login_login"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/btn_Login_Google"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()-> activity.loginGoogle()}"
+            android:adjustViewBounds="true"
+            android:elevation="20dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/btn_Login_Kakao"
+            app:layout_constraintStart_toStartOf="@+id/btn_Login_Kakao"
+            app:layout_constraintTop_toBottomOf="@+id/btn_Login_Kakao"
+            app:srcCompat="@drawable/ic_login_google"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/btn_Login_Email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{()-> activity.loginEmail()}"
+            app:layout_constraintEnd_toEndOf="@+id/btn_Login_Google"
+            app:layout_constraintStart_toStartOf="@+id/btn_Login_Google"
+            app:layout_constraintTop_toBottomOf="@+id/btn_Login_Google"
+            android:adjustViewBounds="true"
+            android:elevation="20dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_login_email"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
