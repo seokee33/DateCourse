@@ -6,17 +6,17 @@
     <data>
         <variable
             name="viewModel"
-            type="com.seokee.datecourse.login.email.signin.SignInViewModel" />
+            type="com.seokee.datecourse.view.login.email.signin.SignInViewModel" />
         <variable
             name="activity"
-            type="com.seokee.datecourse.login.email.signin.SignIn" />
+            type="com.seokee.datecourse.view.login.email.signin.SignIn" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".login.email.signin.SignIn">
+        tools:context=".view.login.email.signin.SignIn">
 
         <EditText
             android:id="@+id/et_SignIn_Email"
@@ -27,7 +27,7 @@
             android:minHeight="48dp"
             android:inputType="textEmailAddress"
             android:hint="@string/et_hint_email"
-            android:text="@{viewModel.email}"
+            android:text="@={viewModel.email}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
             android:minHeight="48dp"
             android:layout_marginTop="10dp"
             android:inputType="textPersonName"
-            android:text="@{viewModel.passwd}"
+            android:text="@={viewModel.passwd}"
             android:hint="@string/et_hint_pw"
             app:layout_constraintEnd_toEndOf="@+id/et_SignIn_Email"
             app:layout_constraintStart_toStartOf="@+id/et_SignIn_Email"
@@ -52,7 +52,7 @@
             android:id="@+id/btn_SignIn_Login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> activity.emailLogin()}"
+            android:onClick="@{(view) -> viewModel.emailLogin(view)}"
             android:layout_marginTop="10dp"
             android:paddingVertical="5dp"
             android:backgroundTint="@color/main_color"

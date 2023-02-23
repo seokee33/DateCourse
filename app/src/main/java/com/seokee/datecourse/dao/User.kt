@@ -5,12 +5,8 @@ import com.google.gson.annotations.SerializedName
 
 data class User(
     @Expose
-    @SerializedName("userEmail")
-    var userEmail: String,
-
-    @Expose
-    @SerializedName("password")
-    var password: String,
+    @SerializedName("idToken")
+    var idToken: String,
 
     @Expose
     @SerializedName("name")

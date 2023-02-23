@@ -6,35 +6,36 @@
     <data>
         <variable
             name="viewModel"
-            type="com.seokee.datecourse.login.LoginViewModel" />
+            type="com.seokee.datecourse.view.login.LoginViewModel" />
         <variable
             name="activity"
-            type="com.seokee.datecourse.login.Login" />
+            type="com.seokee.datecourse.view.login.Login" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".login.Login">
+        tools:context=".view.login.Login">
 
         <ImageView
             android:id="@+id/imageView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="50dp"
+            android:layout_marginTop="30dp"
             android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_logo" />
         <ImageButton
             android:id="@+id/btn_Login_Kakao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="@{()-> activity.loginKakao()}"
-            android:layout_marginHorizontal="20dp"
+            android:layout_marginHorizontal="50dp"
             android:adjustViewBounds="true"
             android:elevation="20dp"
             android:background="@android:color/transparent"
@@ -51,7 +52,7 @@
             android:id="@+id/btn_Login_Google"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="@{()-> activity.loginGoogle()}"
+            android:onClick="@{(view)-> viewModel.loginGoogle(view)}"
             android:adjustViewBounds="true"
             android:elevation="20dp"
             android:background="@android:color/transparent"
