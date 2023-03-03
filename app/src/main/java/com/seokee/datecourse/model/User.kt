@@ -1,4 +1,4 @@
-package com.seokee.datecourse.dao
+package com.seokee.datecourse.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -19,4 +19,8 @@ data class User(
     @Expose
     @SerializedName("gender")
     var gender: String,
+
+    @Expose
+    @SerializedName("email")
+    var email: String,
 )

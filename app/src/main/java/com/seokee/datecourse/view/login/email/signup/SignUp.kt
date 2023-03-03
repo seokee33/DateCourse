@@ -6,9 +6,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
-import com.seokee.datecourse.view.main.MainActivity
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.ActivitySignUpBinding
+import com.seokee.datecourse.view.main.MainActivity2
 
 class SignUp : AppCompatActivity() {
 
@@ -39,7 +39,7 @@ class SignUp : AppCompatActivity() {
         signUpViewModel.signUpSuccess.observe(this){
             if(it){
                 finish()
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, MainActivity2::class.java))
             }
         }
 

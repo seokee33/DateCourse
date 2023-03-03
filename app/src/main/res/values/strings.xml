@@ -11,7 +11,52 @@
     <string name="select_date">선택</string>
     <string name="user_birthday">생일</string>
 
+    <!-- BottomNavi -->
+    <string name="menu_Map">지도</string>
+    <string name="menu_List">리스트</string>
+    <string name="menu_Search">검색</string>
+    <string name="menu_Choice">저장</string>
+    <string name="menu_Info">내정보</string>
 
     <!-- Side Menu-->
     <string name="side_menu_addLocation">코스 등록</string>
+
+    <!-- KakaoMap API KEY-->
+    <string name="map_API_KEY">63fa3d95d3d13d03c21196598548e56b</string>
+
+    <!-- Location -->
+    <string name="setting_Location_Name">주소 설정</string>
+    <string name="setting_Location_Edit">편집</string>
+    <string name="setting_Location_Search">지번, 도로명, 건물명으로 검색</string>
+    <string name="setting_Location_SavedMY">즐겨찾기</string>
+
+    <!--  MenuInfo  -->
+    <string name="menuInfoName">My</string>
+
+    <!-- MenuInfo_UserSetting -->
+    <string name="signOut">로그아웃</string>
+
+    <!-- AddLocation   -->
+    <string name="whatCount">등록할 장소 수</string>
+    <string name="addLocationName">제목을 입력해주세요</string>
+    <string name="addLocation_LName">장소 이름</string>
+    <string name="addLocation_Address">주소를 입력해주세요</string>
+    <string name="addLocation_AddressSearch">검색</string>
+    <string name="AddLocationDescription">이 장소에 대해 설명해주세요</string>
+    <string name="AddLocationDescriptionName">장소 설명</string>
+    <string name="addLocation_Delete">이 장소 삭제</string>
+    <string name="addLocation_SelectAtmosphere">분위기를 선택해주세요</string>
+    <string name="addLocation_AtmosphereName">분위기</string>
+    <string name="addLocation_Add">장소 추가 하기</string>
+    <string name="btn_AddLocationActivity">경로 추가</string>
+
+
+    <string-array name="category_array">
+        <item>카페</item>
+        <item>음식점</item>
+        <item>스포츠</item>
+        <item>명소</item>
+    </string-array>
 </resources>
+
+

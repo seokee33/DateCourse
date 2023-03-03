@@ -6,10 +6,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
-import com.seokee.datecourse.view.main.MainActivity
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.ActivitySignInBinding
 import com.seokee.datecourse.view.login.email.signup.SignUp
+import com.seokee.datecourse.view.main.MainActivity2
 
 class SignIn : AppCompatActivity() {
     val tag = "SignInActivity"
@@ -38,7 +38,7 @@ class SignIn : AppCompatActivity() {
         signInViewModel.signInSuccess.observe(this){
             if(it){
                 finish()
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, MainActivity2::class.java))
             }
         }
     }

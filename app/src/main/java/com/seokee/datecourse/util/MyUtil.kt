@@ -31,4 +31,12 @@ object GetHashKey{
             }
         }
     }
+
+    fun String?.isJsonObject():Boolean = this?.startsWith("{")== true && this.endsWith("}")
+
+    // 문자열이 제이슨 배열인지
+    fun String?.isJsonArray() : Boolean{
+        return this?.startsWith("[")== true && this.endsWith("]")
+    }
 }
+

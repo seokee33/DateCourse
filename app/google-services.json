@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "21040071053",
+    "project_id": "datecourse-d0e7e",
+    "storage_bucket": "datecourse-d0e7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21040071053:android:2f20532db2a1e1b9a47dc4",
+        "android_client_info": {
+          "package_name": "com.seokee.datecourse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21040071053-j7p2mn3sp7b42kmvlj7dioag3helr7np.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seokee.datecourse",
+            "certificate_hash": "2d6055b822aba208ea7396121a0c58d5a0a6e6dc"
+          }
+        },
+        {
+          "client_id": "21040071053-n45313dmp512ltqnqqbjtbv4f694ih30.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.seokee.datecourse",
+            "certificate_hash": "2457bc341eeb0a127862f3478ad9f86f10288bb3"
+          }
+        },
+        {
+          "client_id": "21040071053-7ir0tldeklm9sjtcrjr6bhev3ip9f18s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYRluIVh8qdkJGrosK68n2lpzkFJy1rC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21040071053-7ir0tldeklm9sjtcrjr6bhev3ip9f18s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
