@@ -9,14 +9,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.ActivitySignInBinding
 import com.seokee.datecourse.view.login.email.signup.SignUp
-import com.seokee.datecourse.view.main.MainActivity2
+import com.seokee.datecourse.view.main.MainActivity
 
 class SignIn : AppCompatActivity() {
     val tag = "SignInActivity"
 
     lateinit var binding: ActivitySignInBinding
     private val signInViewModel: SignInViewModel by viewModels()
-
 
     // Firebae
     lateinit var auth: FirebaseAuth
@@ -34,11 +33,11 @@ class SignIn : AppCompatActivity() {
         setObserve()
     }
 
-    private fun setObserve(){
-        signInViewModel.signInSuccess.observe(this){
-            if(it){
+    private fun setObserve() {
+        signInViewModel.signInSuccess.observe(this) {
+            if (it) {
                 finish()
-                startActivity(Intent(this, MainActivity2::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
             }
         }
     }

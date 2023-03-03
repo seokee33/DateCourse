@@ -13,31 +13,29 @@ object MyLocation {
     private val tag = "MyLocation"
     var mLastLocation: Location? = null
 
-    fun getMyLocation(context: Context):Location?{
-
+    fun getMyLocation(context: Context): Location? {
         val mFusedLocationProviderClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
         if (ActivityCompat.checkSelfPermission(
                 context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
                 context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION,
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             return mLastLocation
-        }else{
+        } else {
             mFusedLocationProviderClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
-                    if(location != null){
+                    if (location != null) {
                         Log.w(tag, "Location : " + location.latitude + " , " + location.longitude)
                         mLastLocation = location
                         AppData.myLocation = location
                     }
-
                 }
                 .addOnFailureListener {
-                    Log.w(tag,it.toString())
+                    Log.w(tag, it.toString())
                 }
         }
         return mLastLocation

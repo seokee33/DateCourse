@@ -11,27 +11,25 @@ import androidx.fragment.app.viewModels
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.FragmentListBinding
 
-class MenuList: Fragment() {
+class MenuList : Fragment() {
 
     companion object {
         const val TAG: String = "MenuList"
         fun newInstance(): MenuList {
             return MenuList()
         }
-
     }
 
-
-    private lateinit var binding : FragmentListBinding
+    private lateinit var binding: FragmentListBinding
     private val menuListViewModel: MenuListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list,container,false)
-        Log.d(TAG,"MenuList")
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
+        Log.d(TAG, "MenuList")
         return binding.root
     }
 
@@ -40,7 +38,5 @@ class MenuList: Fragment() {
         binding.viewModel = menuListViewModel
         binding.fragment = this
         binding.lifecycleOwner = this
-
     }
-
 }

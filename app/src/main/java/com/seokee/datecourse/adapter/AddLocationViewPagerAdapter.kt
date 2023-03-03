@@ -6,14 +6,14 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.view.get
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.ViewpagerItemAddLocationBinding
-import com.seokee.datecourse.dto.BoardRecommendLocation
 import com.seokee.datecourse.model.RecommendLocation
 import com.seokee.datecourse.view.main.addlocation.AddLocationViewModel
 import com.seokee.datecourse.view.main.addlocation.GetLocationInfoDialog
@@ -24,30 +24,28 @@ class AddLocationViewPagerAdapter(val context: Context, val viewModel: AddLocati
     inner class ItemViewHolder(val binding: ViewpagerItemAddLocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(addLocationModel: RecommendLocation) {
-
         }
     }
 
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): AddLocationViewPagerAdapter.ItemViewHolder {
         val binding = ViewpagerItemAddLocationBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
-            false
+            false,
         )
         return ItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(
         holder: AddLocationViewPagerAdapter.ItemViewHolder,
-        position: Int
+        position: Int,
     ) {
         val nowPosition = position
         val first = viewModel.item.locationList.size == 1
-        //장소 이름
+        // 장소 이름
         holder.binding.etLocationName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -58,11 +56,10 @@ class AddLocationViewPagerAdapter(val context: Context, val viewModel: AddLocati
             override fun afterTextChanged(s: Editable?) {
                 viewModel.item.locationList[nowPosition].name =
                     holder.binding.etLocationName.text.toString()
-
             }
         })
 
-        //주소
+        // 주소
         holder.binding.tvAddress.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -72,15 +69,14 @@ class AddLocationViewPagerAdapter(val context: Context, val viewModel: AddLocati
 
             override fun afterTextChanged(s: Editable?) {
             }
-
         })
 
         holder.binding.btnAddressSearch.setOnClickListener {
             val dialog = GetLocationInfoDialog(context)
             dialog.showDialog()
-            dialog.setOnClickListener(object :GetLocationInfoDialog.ButtonClickListener{
+            dialog.setOnClickListener(object : GetLocationInfoDialog.ButtonClickListener {
                 override fun onClicked(text: String) {
-                    var addressValue:String = text
+                    var addressValue: String = text
                     var strvalue = addressValue.split(",")
 
                     viewModel.item.locationList[nowPosition].address = strvalue[0]
@@ -92,12 +88,11 @@ class AddLocationViewPagerAdapter(val context: Context, val viewModel: AddLocati
             })
         }
 
-
-        //분위기
+        // 분위기
         ArrayAdapter.createFromResource(
             context,
             R.array.category_array,
-            android.R.layout.simple_spinner_item
+            android.R.layout.simple_spinner_item,
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             holder.binding.spCategory.adapter = adapter
@@ -109,9 +104,9 @@ class AddLocationViewPagerAdapter(val context: Context, val viewModel: AddLocati
                     parent: AdapterView<*>?,
                     view: View?,
                     position: Int,
-                    id: Long
+                    id: Long,
                 ) {
-                    if(parent != null){
+                    if (parent != null) {
                         viewModel.item.locationList[nowPosition].category =
                             parent.getItemAtPosition(position).toString()
                     }
@@ -119,9 +114,8 @@ class AddLocationViewPagerAdapter(val context: Context, val viewModel: AddLocati
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
-
             }
-        holder.binding.etDescription.addTextChangedListener(object: TextWatcher{
+        holder.binding.etDescription.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -132,30 +126,26 @@ class AddLocationViewPagerAdapter(val context: Context, val viewModel: AddLocati
                 viewModel.item.locationList[nowPosition].description =
                     holder.binding.etDescription.text.toString()
             }
-
         })
 
-
-        //추가 버튼
+        // 추가 버튼
         holder.binding.btnAddLocationAdd.setOnClickListener {
             addLocation()
-            notifyItemInserted(holder.adapterPosition+1)
+            notifyItemInserted(holder.adapterPosition + 1)
             holder.binding.btnThisLocationDelete.visibility = View.VISIBLE
             holder.binding.btnAddLocationAdd.visibility = View.GONE
         }
 
-        //빼기 버튼
+        // 빼기 버튼
         holder.binding.btnThisLocationDelete.setOnClickListener {
             removeLocation(nowPosition)
             notifyItemRemoved(holder.adapterPosition)
             holder.binding.btnThisLocationDelete.visibility = View.GONE
             holder.binding.btnAddLocationAdd.visibility = View.VISIBLE
         }
-
-
     }
     private fun addLocation() {
-        var temp: RecommendLocation = RecommendLocation("","","","","","")
+        var temp: RecommendLocation = RecommendLocation("", "", "", "", "", "")
         viewModel.item.locationList.add(temp)
     }
 
@@ -163,19 +153,18 @@ class AddLocationViewPagerAdapter(val context: Context, val viewModel: AddLocati
         viewModel.item.locationList.removeAt(position)
     }
 
-
     companion object {
         val differ = object : DiffUtil.ItemCallback<RecommendLocation>() {
             override fun areItemsTheSame(
                 oldItem: RecommendLocation,
-                newItem: RecommendLocation
+                newItem: RecommendLocation,
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
                 oldItem: RecommendLocation,
-                newItem: RecommendLocation
+                newItem: RecommendLocation,
             ): Boolean {
                 return oldItem == newItem
             }

@@ -13,54 +13,51 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.FragmentMapBinding
 import com.seokee.datecourse.util.MyLocation
 import com.seokee.datecourse.util.serverdb.Repository
-import com.seokee.datecourse.view.login.Login
 import com.seokee.datecourse.view.main.addlocation.AddLocation
-import com.seokee.datecourse.view.main.info.MenuInfo
 import com.seokee.datecourse.view.main.location.SelectLocationBottomSheet
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
-class MenuMap: Fragment() {
+class MenuMap : Fragment() {
     companion object {
         const val TAG: String = "MenuMap"
         fun newInstance(): MenuMap {
             return MenuMap()
         }
-
     }
 
-
-    private lateinit var binding : FragmentMapBinding
+    private lateinit var binding: FragmentMapBinding
     private lateinit var menuMapViewModel: MenuMapViewModel
     private lateinit var repository: Repository
 
-    //KakaoMap
+    // KakaoMap
     lateinit var mapView: MapView
     lateinit var mapViewContainer: ViewGroup
 
-    //현위치 가져오기
+    // 현위치 가져오기
     private var mFusedLocationProviderClient: FusedLocationProviderClient? =
         null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
-    private lateinit var mLocationRequest: LocationRequest  // 위치 정보 요청의 매개변수를 저장하는
-
+    private lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map,container,false)
-        Log.d(TAG,"MenuMap")
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
+        Log.d(TAG, "MenuMap")
 
         return binding.root
     }
@@ -70,22 +67,21 @@ class MenuMap: Fragment() {
 
         repository = Repository()
         val viewModelFactory = MenuMapViewModelFactory(repository)
-        menuMapViewModel = ViewModelProvider(this,viewModelFactory).get(MenuMapViewModel::class.java)
+        menuMapViewModel = ViewModelProvider(this, viewModelFactory).get(MenuMapViewModel::class.java)
 
         binding.viewModel = menuMapViewModel
         binding.fragment = this
         binding.lifecycleOwner = this
 
-        //Kakao Map
-        //MapView 초기화
+        // Kakao Map
+        // MapView 초기화
         initMapView()
 
         startLocationUpdates()
-
     }
 
     /** MapView 초기화 */
-    private fun initMapView(){
+    private fun initMapView() {
         // 해쉬키 얻기 : KakaoMap API HashKey
         // GetHashKey.getHashKey(this)
 
@@ -94,44 +90,42 @@ class MenuMap: Fragment() {
         mapViewContainer.addView(mapView)
 
         // 줌 인
-        mapView.zoomIn(true);
+        mapView.zoomIn(true)
 
         // 줌 아웃
-        mapView.zoomOut(true);
+        mapView.zoomOut(true)
 
         startLocationUpdates()
     }
 
     /**현위치 가져오기*/
     private fun startLocationUpdates() {
-        //FusedLocationProviderClient의 인스턴스를 생성.
+        // FusedLocationProviderClient의 인스턴스를 생성.
         mFusedLocationProviderClient = null
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION,
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             return
-        }else{
+        } else {
             mLocationRequest = LocationRequest.create().apply {
                 priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             }
-
 
             // 기기의 위치에 관한 정기 업데이트를 요청하는 메서드 실행
             // 지정한 루퍼 스레드(Looper.myLooper())에서 콜백(mLocationCallback)으로 위치 업데이트를 요청
             mFusedLocationProviderClient!!.requestLocationUpdates(
                 mLocationRequest,
                 mLocationCallback,
-                Looper.myLooper()
+                Looper.myLooper(),
             )
         }
-
     }
 
     // 시스템으로 부터 위치 정보를 콜백으로 받음
@@ -147,32 +141,30 @@ class MenuMap: Fragment() {
     fun onLocationChanged(location: Location) {
         mLastLocation = location
         val myLocation = LatLng(mLastLocation.latitude, mLastLocation.longitude)
-        Log.w(tag,"onLocationChanged()")
+        Log.w(tag, "onLocationChanged()")
 
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(myLocation.latitude, myLocation.longitude),5, true);
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(myLocation.latitude, myLocation.longitude), 5, true)
     }
 
-    //View
+    // View
     /** 현위치 버튼 클릭시*/
-    fun btnMyLocation(){
+    fun btnMyLocation() {
         MyLocation.getMyLocation(requireContext())
-        if(MyLocation.mLastLocation!= null){
+        if (MyLocation.mLastLocation != null) {
             mLastLocation = MyLocation.mLastLocation!!
-            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(mLastLocation.latitude, mLastLocation.longitude),5, true);
+            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(mLastLocation.latitude, mLastLocation.longitude), 5, true)
         }
     }
 
     /**
      * 위치 선택
      *     - BottomSheetDialog*/
-    fun btnSelectLocation(){
+    fun btnSelectLocation() {
         val bottomSheet = SelectLocationBottomSheet(menuMapViewModel)
         activity?.supportFragmentManager?.let { bottomSheet.show(it, bottomSheet.tag) }
     }
 
-
-    fun btnAddLocation(){
+    fun btnAddLocation() {
         startActivity(Intent(activity, AddLocation::class.java))
     }
-
 }

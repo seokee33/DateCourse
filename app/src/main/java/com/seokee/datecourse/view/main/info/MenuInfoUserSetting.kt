@@ -21,7 +21,6 @@ class MenuInfoUserSetting : Fragment() {
         fun newInstance(): MenuInfoUserSetting {
             return MenuInfoUserSetting()
         }
-
     }
 
     private lateinit var binding: MenuInfoUserSettingBinding
@@ -32,7 +31,7 @@ class MenuInfoUserSetting : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.menu_info_user_setting, container, false)
@@ -52,5 +51,4 @@ class MenuInfoUserSetting : Fragment() {
         startActivity(Intent((parentFragment as MenuInfo).activity, Login::class.java))
         (parentFragment as MenuInfo).activity?.finish()
     }
-
 }

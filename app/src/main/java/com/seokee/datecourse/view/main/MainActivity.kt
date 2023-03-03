@@ -24,44 +24,43 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.activity = this
         binding.mainViewModel = mainViewModel
         binding.lifecycleOwner = this
 
         initNavigationBar()
         menuMap = MenuMap.newInstance()
-        supportFragmentManager.beginTransaction().replace(binding.fragMain.id,menuMap).commit()
+        supportFragmentManager.beginTransaction().replace(binding.fragMain.id, menuMap).commit()
     }
 
-    private fun initNavigationBar(){
+    private fun initNavigationBar() {
         binding.bottomNavigationView.run {
             setOnItemSelectedListener { item ->
-                when(item.itemId){
-                    R.id.menu_Map ->{
+                when (item.itemId) {
+                    R.id.menu_Map -> {
                         menuMap = MenuMap.newInstance()
-                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id,menuMap).commit()
+                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id, menuMap).commit()
                     }
-                    R.id.menu_List ->{
+                    R.id.menu_List -> {
                         menuList = MenuList.newInstance()
-                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id,menuList).commit()
+                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id, menuList).commit()
                     }
-                    R.id.menu_Search ->{
+                    R.id.menu_Search -> {
                         menuSearch = MenuSearch.newInstance()
-                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id,menuSearch).commit()
+                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id, menuSearch).commit()
                     }
-                    R.id.menu_Choice ->{
+                    R.id.menu_Choice -> {
                         menuChoice = MenuChoice.newInstance()
-                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id,menuChoice).commit()
+                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id, menuChoice).commit()
                     }
-                    R.id.menu_Info ->{
+                    R.id.menu_Info -> {
                         menuInfo = MenuInfo.newInstance()
-                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id,menuInfo).commit()
+                        supportFragmentManager.beginTransaction().replace(binding.fragMain.id, menuInfo).commit()
                     }
                 }
                 true
             }
         }
     }
-
 }

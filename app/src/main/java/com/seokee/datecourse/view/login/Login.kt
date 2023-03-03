@@ -31,7 +31,7 @@ class Login : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
 
-    //Firebase Auth
+    // Firebase Auth
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +54,9 @@ class Login : AppCompatActivity() {
      *  - Location
      * */
     private fun requestPermissions(): Boolean {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-            && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        ) {
             return true
         }
 
@@ -66,33 +67,38 @@ class Login : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode){
+        when (requestCode) {
             REQUEST_CODE -> {
-                if (grantResults.isNotEmpty()){
+                if (grantResults.isNotEmpty()) {
                     var isAllGranted = true
                     // 요청한 권한들 수락했는지 확인
                     for (grant in grantResults) {
                         if (grant != PackageManager.PERMISSION_GRANTED) {
                             isAllGranted = false
-                            break;
+                            break
                         }
                     }
 
                     // 허용하지 않은 권한이 있음. 필수권한/선택권한 여부에 따라서 별도 처리를 해주어야 함.
                     if (!isAllGranted) {
-                        if(!ActivityCompat.shouldShowRequestPermissionRationale(this,
-                                Manifest.permission.ACCESS_FINE_LOCATION)
-                            || !ActivityCompat.shouldShowRequestPermissionRationale(this,
-                                Manifest.permission.ACCESS_COARSE_LOCATION)){
+                        if (!ActivityCompat.shouldShowRequestPermissionRationale(
+                                this,
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                            ) ||
+                            !ActivityCompat.shouldShowRequestPermissionRationale(
+                                this,
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                            )
+                        ) {
                             // 다시 묻지 않기 체크하면서 권한 거부 되었음.
                             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                                 .setData(Uri.parse("package:" + BuildConfig.APPLICATION_ID))
                             startActivity(intent)
                         } else {
-                            Toast.makeText(this,"권한을 설정해주세요",Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "권한을 설정해주세요", Toast.LENGTH_LONG).show()
                             finish()
                         }
                     }
@@ -101,11 +107,12 @@ class Login : AppCompatActivity() {
         }
     }
 
-    companion object{
+    companion object {
         const val REQUEST_CODE = 100
         val permissions: Array<String> = arrayOf(
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION)
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+        )
     }
 
     /**
@@ -120,13 +127,14 @@ class Login : AppCompatActivity() {
             }
         }
 
-        loginViewModel.googleLoginSuccess.observe(this){
-            if(it){
+        loginViewModel.googleLoginSuccess.observe(this) {
+            if (it) {
                 finish()
                 startActivity(Intent(this, MainActivity::class.java))
             }
         }
     }
+
     // Kakao Login
     fun loginKakao() {
         Log.w(tag, "KAKAO_Login")
@@ -134,8 +142,8 @@ class Login : AppCompatActivity() {
     }
 
     // Google Login
-    var googleLoginResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        result ->
+    var googleLoginResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result ->
 
         val data = result.data
         val task = GoogleSignIn.getSignedInAccountFromIntent(data)

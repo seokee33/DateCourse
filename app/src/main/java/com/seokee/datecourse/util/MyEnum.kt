@@ -1,11 +1,8 @@
 package com.seokee.datecourse.util
 
-enum class MyEnum {
+enum class MyEnum
 
-}
-
-
-enum class MainFragmentEnum{
+enum class MainFragmentEnum {
     MenuMap,
     MenuList,
     MenuSearch,
@@ -13,21 +10,18 @@ enum class MainFragmentEnum{
     MenuInfo,
 }
 
-
-enum class MenuInfoFragmentState{
+enum class MenuInfoFragmentState {
     MenuInfoMain,
     UserSetting,
-
 }
 
-enum class AddLocationFragmentState{
+enum class AddLocationFragmentState {
     Count,
     Write,
     Finish,
-
 }
 
-enum class RESPONSE_STATE{
+enum class RESPONSE_STATE {
     OKAY,
-    FAIL
+    FAIL,
 }

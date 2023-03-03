@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.ActivitySignUpBinding
-import com.seokee.datecourse.view.main.MainActivity2
+import com.seokee.datecourse.view.main.MainActivity
 
 class SignUp : AppCompatActivity() {
 
@@ -16,11 +16,10 @@ class SignUp : AppCompatActivity() {
     lateinit var binding: ActivitySignUpBinding
     private val signUpViewModel: SignUpViewModel by viewModels()
 
-    //Firebase
+    // Firebase
     lateinit var auth: FirebaseAuth
 
-    //Email
-
+    // Email
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,19 +28,18 @@ class SignUp : AppCompatActivity() {
         binding.activity = this
         binding.lifecycleOwner = this
 
-        //Firebase
+        // Firebase
         auth = FirebaseAuth.getInstance()
 
         setObserve()
     }
 
-    private fun setObserve(){
-        signUpViewModel.signUpSuccess.observe(this){
-            if(it){
+    private fun setObserve() {
+        signUpViewModel.signUpSuccess.observe(this) {
+            if (it) {
                 finish()
-                startActivity(Intent(this, MainActivity2::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
             }
         }
-
     }
 }

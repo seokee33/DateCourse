@@ -20,7 +20,7 @@ class SignInViewModel : ViewModel() {
         val inputEmail: String = email.value.toString()
         val inputPasswd: String = passwd.value.toString()
 
-        if(inputEmail.isNotEmpty() && inputPasswd.isNotEmpty()){
+        if (inputEmail.isNotEmpty() && inputPasswd.isNotEmpty()) {
             auth.signInWithEmailAndPassword(inputEmail, inputPasswd)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -31,7 +31,7 @@ class SignInViewModel : ViewModel() {
                         Toast.makeText(view.context, "Authentication failed.", Toast.LENGTH_SHORT).show()
                     }
                 }
-        }else{
+        } else {
             Toast.makeText(view.context, "아이디와 비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
         }
     }

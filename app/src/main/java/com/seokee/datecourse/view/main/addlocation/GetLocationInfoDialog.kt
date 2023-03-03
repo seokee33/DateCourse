@@ -29,13 +29,12 @@ class GetLocationInfoDialog(context: Context) {
     lateinit var etMoreAddress: EditText
     lateinit var btnSend: Button
 
-
     fun showDialog() {
         dialog.setContentView(R.layout.dialog_getlocationinfo)
         itemList = ArrayList<LocationAddress>()
         dialog.window!!.setLayout(
             WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
+            WindowManager.LayoutParams.WRAP_CONTENT,
         )
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
@@ -49,16 +48,13 @@ class GetLocationInfoDialog(context: Context) {
 
         tvSelectedAddress.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             }
 
             override fun afterTextChanged(s: Editable?) {
-
             }
-
         })
 
         btnSend.setOnClickListener {
@@ -66,16 +62,14 @@ class GetLocationInfoDialog(context: Context) {
                 if (etMoreAddress.text.toString().isNotEmpty()) {
                     var value = tvSelectedAddress.text.toString() + etMoreAddress.text.toString()
                     onClickListener.onClicked(value)
-                }else{
+                } else {
                     onClickListener.onClicked(tvSelectedAddress.text.toString())
                 }
                 dialog.dismiss()
             } else {
                 Toast.makeText(dialog.context, "주소를 선택해주세요", Toast.LENGTH_SHORT).show()
             }
-
         }
-
 
         adapter = RvGetAddressAdapter(dialog.context, itemList, this)
         rv_Dialog_GetLocation.layoutManager = LinearLayoutManager(dialog.context)
@@ -93,7 +87,7 @@ class GetLocationInfoDialog(context: Context) {
                             Log.d("MainActivity", "API 호춣 성공 : $location")
                             Log.d(
                                 "MainActivity",
-                                "getDAta!!!!!!!!!!!!!!!!! : ${location.toString()}"
+                                "getDAta!!!!!!!!!!!!!!!!! : $location",
                             )
                             if (location != null) {
                                 adapter.changeItem(location.documents)
@@ -106,7 +100,8 @@ class GetLocationInfoDialog(context: Context) {
                             Log.d("MainActivity", "API 호출 Error : $responseBody")
                         }
                     }
-                })
+                },
+            )
 //            dialog.dismiss()
         }
         dialog.show()

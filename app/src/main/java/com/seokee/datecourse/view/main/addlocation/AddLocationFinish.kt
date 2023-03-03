@@ -10,32 +10,30 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.AddlocationFinishBinding
-import com.seokee.datecourse.databinding.AddlocationWriteLocationBinding
 import com.seokee.datecourse.view.main.list.MenuList
 
-class AddLocationFinish: Fragment() {
+class AddLocationFinish : Fragment() {
     companion object {
         const val TAG: String = "AddLocationFinish"
-        var addLocationFinish:AddLocationFinish? = null
+        var addLocationFinish: AddLocationFinish? = null
         fun newInstance(): AddLocationFinish {
-            if(addLocationFinish == null){
+            if (addLocationFinish == null) {
                 addLocationFinish = AddLocationFinish()
             }
             return addLocationFinish as AddLocationFinish
         }
     }
 
-
-    private lateinit var binding : AddlocationFinishBinding
+    private lateinit var binding: AddlocationFinishBinding
     private val viewModel: AddLocationViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.addlocation_finish,container,false)
-        Log.d(MenuList.TAG,"AddLocationFinish")
+        binding = DataBindingUtil.inflate(inflater, R.layout.addlocation_finish, container, false)
+        Log.d(MenuList.TAG, "AddLocationFinish")
         return binding.root
     }
 
@@ -44,7 +42,5 @@ class AddLocationFinish: Fragment() {
         binding.viewModel = viewModel
         binding.fragment = this
         binding.lifecycleOwner = this
-
     }
-
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.seokee.datecourse.util.AppData
 import com.seokee.datecourse.util.MenuInfoFragmentState
 
-class MenuInfoViewModel(): ViewModel() {
+class MenuInfoViewModel() : ViewModel() {
     var userName: MutableLiveData<String> = MutableLiveData("UserName")
     var userEmail: MutableLiveData<String> = MutableLiveData("UserEmail")
 
@@ -17,9 +17,6 @@ class MenuInfoViewModel(): ViewModel() {
         userName.value = AppData.appUserInfo?.email
     }
 
-    fun onclickUserInfoChange(v: View){
-
+    fun onclickUserInfoChange(v: View) {
     }
-
-
 }

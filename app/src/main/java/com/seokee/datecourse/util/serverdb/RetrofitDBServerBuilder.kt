@@ -23,10 +23,4 @@ object RetrofitDBServerBuilder {
             .build()
         serverLocationAPI = retrofit2.create(ServerDBAPI::class.java)
     }
-
-
-
-
-
-
 }

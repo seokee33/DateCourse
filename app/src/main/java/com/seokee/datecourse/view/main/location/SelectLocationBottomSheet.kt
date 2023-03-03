@@ -12,17 +12,16 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.seokee.datecourse.databinding.BottomsheetLocationSettingBinding
 import com.seokee.datecourse.view.main.map.MenuMapViewModel
 
-
-class SelectLocationBottomSheet(vm: ViewModel): BottomSheetDialogFragment() {
+class SelectLocationBottomSheet(vm: ViewModel) : BottomSheetDialogFragment() {
 
     lateinit var binding: BottomsheetLocationSettingBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = BottomsheetLocationSettingBinding.inflate(inflater,container,false)
+        binding = BottomsheetLocationSettingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,8 +34,7 @@ class SelectLocationBottomSheet(vm: ViewModel): BottomSheetDialogFragment() {
 
         var layoutParams: ViewGroup.LayoutParams = bottomSheet.layoutParams
         layoutParams.height = getWindowHeight()
-        bottomSheet.setLayoutParams(layoutParams);
-
+        bottomSheet.setLayoutParams(layoutParams)
     }
     private fun getWindowHeight(): Int {
         // Calculate window height for fullscreen use
@@ -44,9 +42,9 @@ class SelectLocationBottomSheet(vm: ViewModel): BottomSheetDialogFragment() {
         (context as Activity?)!!.windowManager.defaultDisplay.getMetrics(displayMetrics)
         return displayMetrics.heightPixels
     }
-    private fun selectLocationDataChange(viewModel: Any){
-        when(viewModel){
-            is MenuMapViewModel ->{
+    private fun selectLocationDataChange(viewModel: Any) {
+        when (viewModel) {
+            is MenuMapViewModel -> {
 //                viewModel.selectedLocation.value = "????"
             }
         }

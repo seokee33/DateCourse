@@ -11,26 +11,24 @@ import androidx.fragment.app.viewModels
 import com.seokee.datecourse.R
 import com.seokee.datecourse.databinding.FragmentSearchBinding
 
-class MenuSearch: Fragment() {
+class MenuSearch : Fragment() {
     companion object {
         const val TAG: String = "MenuSearch"
         fun newInstance(): MenuSearch {
             return MenuSearch()
         }
-
     }
 
-
-    private lateinit var binding : FragmentSearchBinding
+    private lateinit var binding: FragmentSearchBinding
     private val menuSearchViewModel: MenuSearchViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search,container,false)
-        Log.d(TAG,"MenuSearch")
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
+        Log.d(TAG, "MenuSearch")
         return binding.root
     }
 
@@ -39,6 +37,5 @@ class MenuSearch: Fragment() {
         binding.viewModel = menuSearchViewModel
         binding.fragment = this
         binding.lifecycleOwner = this
-
     }
 }

@@ -19,10 +19,10 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
     val context = getApplication<Application>().applicationContext
 
-    //Firebase
+    // Firebase
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
-    //Google
+    // Google
     private var googleSignInClient: GoogleSignInClient
     var googleLoginSuccess: MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -31,24 +31,23 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             .requestIdToken(context.getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        googleSignInClient = GoogleSignIn.getClient(context,gso)
-
+        googleSignInClient = GoogleSignIn.getClient(context, gso)
     }
 
-    //Google Login
-    fun loginGoogle(view: View){
+    // Google Login
+    fun loginGoogle(view: View) {
         var i = googleSignInClient.signInIntent
         (view.context as? Login)?.googleLoginResult?.launch(i)
     }
-    fun firebaseAuthWithGoogle(idToken: String?){
-        val credential = GoogleAuthProvider.getCredential(idToken,null)
+    fun firebaseAuthWithGoogle(idToken: String?) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener {
-                if(it.isSuccessful){
-                   googleLoginSuccess.value = true
-                }else{
-                    //아이디가 있을경우우
-               }
+                if (it.isSuccessful) {
+                    googleLoginSuccess.value = true
+                } else {
+                    // 아이디가 있을경우우
+                }
             }
     }
 }

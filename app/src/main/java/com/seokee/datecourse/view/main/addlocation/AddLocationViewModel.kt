@@ -6,11 +6,12 @@ import com.seokee.datecourse.dto.BoardRecommendLocation
 import com.seokee.datecourse.model.RecommendLocation
 import com.seokee.datecourse.util.AddLocationFragmentState
 
-class AddLocationViewModel: ViewModel(){
+class AddLocationViewModel : ViewModel() {
     var nowFragmentState: MutableLiveData<AddLocationFragmentState> = MutableLiveData(AddLocationFragmentState.Count)
 
-    var item: BoardRecommendLocation = BoardRecommendLocation("",
-        arrayListOf(RecommendLocation("","","","","",""))
+    var item: BoardRecommendLocation = BoardRecommendLocation(
+        "",
+        arrayListOf(RecommendLocation("", "", "", "", "", "")),
     )
 
     var boardName: MutableLiveData<String> = MutableLiveData("")
@@ -20,6 +21,4 @@ class AddLocationViewModel: ViewModel(){
 
     var locationCount: MutableLiveData<Int> = MutableLiveData(1)
     var locationCountText: MutableLiveData<String> = MutableLiveData("$locationCount")
-
-
 }

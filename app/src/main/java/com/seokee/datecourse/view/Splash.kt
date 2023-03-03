@@ -21,13 +21,13 @@ class Splash : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             val auth = FirebaseAuth.getInstance()
             val currentUser = auth.currentUser
-            if(currentUser != null){
-                AppData.appUserInfo = User(currentUser.uid,currentUser.displayName.toString(),"2022-12-12","MALE",currentUser.email.toString())
+            if (currentUser != null) {
+                AppData.appUserInfo = User(currentUser.uid, currentUser.displayName.toString(), "2022-12-12", "MALE", currentUser.email.toString())
                 AppData.auth = auth
-                Log.i("Splash","${AppData.appUserInfo!!.idToken},${AppData.appUserInfo!!.name},${AppData.appUserInfo!!.gender},")
+                Log.i("Splash", "${AppData.appUserInfo!!.idToken},${AppData.appUserInfo!!.name},${AppData.appUserInfo!!.gender},")
                 finish()
                 startActivity(Intent(this, MainActivity::class.java))
-            }else{
+            } else {
                 finish()
                 startActivity(Intent(this, Login::class.java))
             }
