@@ -14,7 +14,6 @@ object RetrofitDBServerBuilder {
             .baseUrl("http://3.37.88.181:8080/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
         serverDBAPI = retrofit.create(ServerDBAPI::class.java)
 
         val retrofit2 = Retrofit.Builder()

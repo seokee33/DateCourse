@@ -13,6 +13,8 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -21,9 +23,11 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.seokee.datecourse.R
+import com.seokee.datecourse.adapter.LocationListViewPagerAdapter
 import com.seokee.datecourse.databinding.FragmentMapBinding
 import com.seokee.datecourse.util.MyLocation
 import com.seokee.datecourse.util.serverdb.Repository
+import com.seokee.datecourse.view.main.MainActivity
 import com.seokee.datecourse.view.main.addlocation.AddLocation
 import com.seokee.datecourse.view.main.location.SelectLocationBottomSheet
 import net.daum.mf.map.api.MapPoint
@@ -38,8 +42,7 @@ class MenuMap : Fragment() {
     }
 
     private lateinit var binding: FragmentMapBinding
-    private lateinit var menuMapViewModel: MenuMapViewModel
-    private lateinit var repository: Repository
+    private val menuMapViewModel: MenuMapViewModel by viewModels()
 
     // KakaoMap
     lateinit var mapView: MapView
@@ -50,6 +53,11 @@ class MenuMap : Fragment() {
         null // 현재 위치를 가져오기 위한 변수
     lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
     private lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
+
+
+    //ViewPager =>
+    private val viewPagerAdapter = LocationListViewPagerAdapter()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,13 +73,15 @@ class MenuMap : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        repository = Repository()
-        val viewModelFactory = MenuMapViewModelFactory(repository)
-        menuMapViewModel = ViewModelProvider(this, viewModelFactory).get(MenuMapViewModel::class.java)
-
         binding.viewModel = menuMapViewModel
         binding.fragment = this
         binding.lifecycleOwner = this
+
+        setObserve()
+
+        menuMapViewModel.getLocation()
+        //viewPager
+        binding.vpLocationList.adapter = viewPagerAdapter
 
         // Kakao Map
         // MapView 초기화
@@ -79,6 +89,13 @@ class MenuMap : Fragment() {
 
         startLocationUpdates()
     }
+
+    private fun setObserve(){
+        menuMapViewModel.locationResponse.observe(viewLifecycleOwner) {
+            viewPagerAdapter.submitList(menuMapViewModel.locationResponse.value?.items)
+        }
+    }
+
 
     /** MapView 초기화 */
     private fun initMapView() {
@@ -100,6 +117,7 @@ class MenuMap : Fragment() {
 
     /**현위치 가져오기*/
     private fun startLocationUpdates() {
+        Log.i(TAG,"startLocationUpdates")
         // FusedLocationProviderClient의 인스턴스를 생성.
         mFusedLocationProviderClient = null
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
@@ -141,9 +159,9 @@ class MenuMap : Fragment() {
     fun onLocationChanged(location: Location) {
         mLastLocation = location
         val myLocation = LatLng(mLastLocation.latitude, mLastLocation.longitude)
-        Log.w(tag, "onLocationChanged()")
+        Log.w(TAG, "onLocationChanged()")
 
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(myLocation.latitude, myLocation.longitude), 5, true)
+        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(myLocation.latitude, myLocation.longitude), 3, true)
     }
 
     // View
@@ -152,7 +170,7 @@ class MenuMap : Fragment() {
         MyLocation.getMyLocation(requireContext())
         if (MyLocation.mLastLocation != null) {
             mLastLocation = MyLocation.mLastLocation!!
-            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(mLastLocation.latitude, mLastLocation.longitude), 5, true)
+            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(mLastLocation.latitude, mLastLocation.longitude), 3, true)
         }
     }
 
@@ -167,4 +185,5 @@ class MenuMap : Fragment() {
     fun btnAddLocation() {
         startActivity(Intent(activity, AddLocation::class.java))
     }
+
 }

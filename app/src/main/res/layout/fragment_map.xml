@@ -89,19 +89,33 @@
                 app:srcCompat="@drawable/main_btn_mylocation"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_LocationList"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.95" />
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->fragment.btnAddLocation()}"
                 android:clickable="true"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:contentDescription="@string/btn_AddLocationActivity"
+                android:onClick="@{()->fragment.btnAddLocation()}"
+                app:layout_constraintBottom_toTopOf="@+id/vp_LocationList"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.9"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.95"
-                android:contentDescription="@string/btn_AddLocationActivity"
                 app:srcCompat="@drawable/main_sidemenu_addlocaion" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

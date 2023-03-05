@@ -1,5 +1,6 @@
 package com.seokee.datecourse.util.serverdb
 
+import com.seokee.datecourse.dto.BoardLocationList
 import com.seokee.datecourse.dto.BoardRecommendLocation
 import com.seokee.datecourse.model.User
 import retrofit2.Call
@@ -12,6 +13,6 @@ interface ServerDBAPI {
     @POST("signup")
     fun signupAPI(@Body user: User): Call<User>
 
-    @GET("/v3/cf5878e5-19b6-4221-b374-16cbb8f2bb42")
-    fun getLocationList(): Response<BoardRecommendLocation>
+    @GET("/v3/59f0b497-a791-416a-a351-818513ab0e3c")
+    fun getLocationList(): Call<BoardLocationList>
 }
