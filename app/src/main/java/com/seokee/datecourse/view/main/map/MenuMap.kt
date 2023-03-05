@@ -25,7 +25,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.seokee.datecourse.R
 import com.seokee.datecourse.adapter.LocationListViewPagerAdapter
 import com.seokee.datecourse.databinding.FragmentMapBinding
+import com.seokee.datecourse.util.AppData
 import com.seokee.datecourse.util.MyLocation
+import com.seokee.datecourse.util.datastore.CurrentLocationDataStore
 import com.seokee.datecourse.util.serverdb.Repository
 import com.seokee.datecourse.view.main.MainActivity
 import com.seokee.datecourse.view.main.addlocation.AddLocation
@@ -77,6 +79,22 @@ class MenuMap : Fragment() {
         binding.fragment = this
         binding.lifecycleOwner = this
 
+        //저장된 위치 불러오기
+        try{
+            AppData.currentLocation = CurrentLocationDataStore(requireContext()).getLocation.toString()
+            if(AppData.currentLocation!= null){
+                var strvalue = AppData.currentLocation!!.split(",")
+                AppData.currentAddress = strvalue[0]
+            }
+        }catch (e:java.lang.Exception){
+            Log.i(TAG,e.toString())
+        }
+
+        if(AppData.currentAddress != null){
+            menuMapViewModel.selectedLocation.value = AppData.currentAddress
+        }
+
+
         setObserve()
 
         menuMapViewModel.getLocation()
@@ -90,10 +108,12 @@ class MenuMap : Fragment() {
         startLocationUpdates()
     }
 
-    private fun setObserve(){
+    private fun setObserve() {
         menuMapViewModel.locationResponse.observe(viewLifecycleOwner) {
             viewPagerAdapter.submitList(menuMapViewModel.locationResponse.value?.items)
         }
+
+
     }
 
 
@@ -117,10 +137,11 @@ class MenuMap : Fragment() {
 
     /**현위치 가져오기*/
     private fun startLocationUpdates() {
-        Log.i(TAG,"startLocationUpdates")
+        Log.i(TAG, "startLocationUpdates")
         // FusedLocationProviderClient의 인스턴스를 생성.
         mFusedLocationProviderClient = null
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        mFusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -160,8 +181,12 @@ class MenuMap : Fragment() {
         mLastLocation = location
         val myLocation = LatLng(mLastLocation.latitude, mLastLocation.longitude)
         Log.w(TAG, "onLocationChanged()")
-
-        mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(myLocation.latitude, myLocation.longitude), 3, true)
+        mapView.setMapCenterPointAndZoomLevel(
+            MapPoint.mapPointWithGeoCoord(
+                myLocation.latitude,
+                myLocation.longitude
+            ), 3, true
+        )
     }
 
     // View
@@ -170,7 +195,10 @@ class MenuMap : Fragment() {
         MyLocation.getMyLocation(requireContext())
         if (MyLocation.mLastLocation != null) {
             mLastLocation = MyLocation.mLastLocation!!
-            mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(mLastLocation.latitude, mLastLocation.longitude), 3, true)
+            mapView.setMapCenterPointAndZoomLevel(
+                MapPoint.mapPointWithGeoCoord(mLastLocation.latitude, mLastLocation.longitude),
+                3, true
+            )
         }
     }
 
@@ -178,7 +206,7 @@ class MenuMap : Fragment() {
      * 위치 선택
      *     - BottomSheetDialog*/
     fun btnSelectLocation() {
-        val bottomSheet = SelectLocationBottomSheet(menuMapViewModel)
+        val bottomSheet = SelectLocationBottomSheet()
         activity?.supportFragmentManager?.let { bottomSheet.show(it, bottomSheet.tag) }
     }
 

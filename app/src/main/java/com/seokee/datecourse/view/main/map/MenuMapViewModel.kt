@@ -1,5 +1,6 @@
 package com.seokee.datecourse.view.main.map
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -35,7 +36,7 @@ class MenuMapViewModel() : ViewModel() {
                     }
 
                     override fun onFailure(call: Call<BoardLocationList>, t: Throwable) {
-                        TODO("Not yet implemented")
+
                     }
 
                 })

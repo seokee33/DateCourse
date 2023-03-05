@@ -1,8 +1,19 @@
 package com.seokee.datecourse.util
 
+import android.content.Context
 import android.location.Location
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import com.google.firebase.auth.FirebaseAuth
 import com.seokee.datecourse.model.User
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import java.io.IOException
 
 object AppData {
     // SplashActivity
@@ -17,8 +28,14 @@ object AppData {
 
     // Location
     var myLocation: Location? = null
-}
 
+    var currentLocation: String? = null
+    var currentAddress: String? = null
+
+
+
+
+}
 object API {
     const val BASE_URL: String = "https://dapi.kakao.com/v2/local/"
 

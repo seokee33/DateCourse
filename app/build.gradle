@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -77,6 +78,12 @@ dependencies {
     // DataStore
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
 
+    //RoomDB
+    implementation("androidx.room:room-runtime:2.5.0")
+    annotationProcessor("androidx.room:room-compiler:2.5.0")
+    kapt "androidx.room:room-compiler:2.5.0"
+
+
     // ktlint
     ktlint("com.pinterest:ktlint:0.48.2") {
         attributes {
@@ -89,7 +96,7 @@ dependencies {
 
     // DataStore
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
-
+    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
